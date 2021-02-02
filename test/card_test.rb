@@ -10,7 +10,7 @@ class CardTest < Minitest::Test
   end
 
   def test_it_has_readable_attributes
-    skip
+    # skip
     card = Card.new(:diamond, 'Queen', 12)
 
     assert_equal :diamond, card.suit
