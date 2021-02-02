@@ -15,4 +15,16 @@ class DeckTest < Minitest::Test
     deck = Deck.new()
     assert_equal [], deck.cards
   end
+
+  def test_readable_attribute
+    cards = [1,2,3]
+    deck = Deck.new(cards)
+    assert_equal [1,2,3], deck.cards
+  end
+
+  def test_cards_method_present
+    
+  end
+
+  def
 end
