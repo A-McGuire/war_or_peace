@@ -70,6 +70,8 @@ class DeckTest < Minitest::Test
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
     assert_equal card1, deck.remove_card
+    assert_equal [card3], deck.high_ranking_cards
+    assert_equal 50.00, deck.percent_high_ranking
   end
 
   def test_add_card
@@ -80,5 +82,7 @@ class DeckTest < Minitest::Test
     cards = [card1, card2, card3]
     deck = Deck.new(cards)
     assert_equal cards, deck.add_card(card4)
+    assert_equal [card1, card3, card4], deck.high_ranking_cards
+    assert_equal 75.00, deck.percent_high_ranking
   end
 end
