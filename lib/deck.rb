@@ -6,7 +6,7 @@ class Deck
   end
 
   def rank_of_card_at(index)
-
+    @cards[0].rank
   end
 
   def high_ranking_cards
@@ -18,7 +18,7 @@ class Deck
   end
 
   def remove_card
-    
+
   end
 
   def add_card
