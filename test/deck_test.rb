@@ -12,7 +12,6 @@ class DeckTest < Minitest::Test
   end
 
   def test_default_value
-    cards = [1,2,3]
     deck = Deck.new()
     assert_equal [], deck.cards
   end
