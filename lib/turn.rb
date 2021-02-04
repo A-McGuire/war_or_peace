@@ -15,7 +15,7 @@ class Turn
   end
 
   def winner
-    if @player1.deck.cards[0].rank > @player2.deck.cards[0].rank
+    if @player1.has_lost? == false
       @player1
     else
       @player2
@@ -23,7 +23,13 @@ class Turn
   end
 
   def pile_cards
-    @spoils_of_war << @player1.deck.cards[0]
-    @spoils_of_war << @player2.deck.cards[0]
+    @spoils_of_war.push()
+    @player1.deck.cards.shift
+    @player2.deck.cards.shift
+  end
+
+  def award_spoils
+    winner.deck.cards << @spoils_of_war
+    winner.deck.cards.flatten!
   end
 end
