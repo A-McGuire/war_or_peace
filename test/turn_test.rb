@@ -71,7 +71,7 @@ class TurnTest < Minitest::Test
     assert_equal [], turn.spoils_of_war
   end
 
-  def test_type
+  def test_type_basic
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
