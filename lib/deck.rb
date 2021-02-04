@@ -1,8 +1,9 @@
 class Deck
-  attr_reader :cards
+  attr_reader :cards, :battle_field
   def initialize(cards = [])
     @cards = cards
     @high_cards = 0
+    @battle_field = []
   end
 
   def rank_of_card_at(index)
@@ -19,7 +20,9 @@ class Deck
   end
 
   def remove_card
-    @cards.shift
+    card = @cards.shift
+    @battle_field << card
+    card
   end
 
   def add_card(card)
