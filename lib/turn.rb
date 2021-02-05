@@ -6,16 +6,20 @@ class Turn
     @spoils_of_war = []
   end
 
-  def type
+  def type #determines type of battle and removes card. see deck>remove_card method
     if @player1.deck.rank_of_card_at(0) != @player2.deck.rank_of_card_at(0)
+      # @player1.deck.remove_card; @player1.deck.remove_card
       :basic
-    else @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)
+    elsif @player1.deck.rank_of_card_at(0) == @player2.deck.rank_of_card_at(0)
+      # @player1.deck.remove_card; @player1.deck.remove_card
       :war
     end
+    # winner
   end
 
-  def winner
-    if @player1.deck.cards[0].rank > @player2.deck.cards[0].rank
+  def winner #determines winner of turn
+    # require "pry"; binding.pry
+    if @player1.deck.battle_card.rank > @player2.deck.battle_card.rank
       @player1
     else
       @player2
@@ -23,9 +27,7 @@ class Turn
   end
 
   def pile_cards
-    @spoils_of_war.push(@player1.deck.battle_field, @player2.deck.battle_field)
-    @player1.deck.cards.shift
-    @player2.deck.cards.shift
+    @spoils_of_war.push(@player1.deck.battle_card, @player2.deck.battle_card)
   end
 
   def award_spoils
