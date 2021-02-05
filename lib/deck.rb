@@ -20,9 +20,9 @@ class Deck
   end
 
   def remove_card
-    card = @cards.shift
-    @battle_field << card
-    card
+    battle_card = @cards.shift
+    @battle_field << battle_card
+    battle_card
   end
 
   def add_card(card)

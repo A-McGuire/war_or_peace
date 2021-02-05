@@ -15,7 +15,7 @@ class Turn
   end
 
   def winner
-    if @player1.has_lost? == false
+    if @player1.deck.cards[0].rank > @player2.deck.cards[0].rank
       @player1
     else
       @player2
@@ -23,7 +23,7 @@ class Turn
   end
 
   def pile_cards
-    @spoils_of_war.push()
+    @spoils_of_war.push(@player1.deck.battle_field, @player2.deck.battle_field)
     @player1.deck.cards.shift
     @player2.deck.cards.shift
   end

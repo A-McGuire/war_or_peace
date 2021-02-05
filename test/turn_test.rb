@@ -88,7 +88,8 @@ class TurnTest < Minitest::Test
     player2 = Player.new("Aurora", deck2)
 
     turn = Turn.new(player1, player2)
-
+    player1.deck.remove_card
+    player2.deck.remove_card
     assert_equal :basic, turn.type
   end
 
@@ -114,7 +115,7 @@ class TurnTest < Minitest::Test
   end
 
   def test_pile_cards_basic_type
-    skip
+    # skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
