@@ -30,18 +30,13 @@ class Turn
   end
 
   def war_or_peace
+    spoils_of_war = []
     if type == :basic
-      # winner
       award_spoils
     end
   end
 
   def winner #determines winner of turn
-    # if player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0)
-    #   player1
-    # else
-    #   player2
-    # end
     if type == :basic
       return player1 if player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0)
       player2
@@ -54,10 +49,17 @@ class Turn
   end
 
   def pile_cards
+    #remove cards from both players decks and add to array spoils_of_war
     spoils_of_war.push(player1.deck.remove_card, player2.deck.remove_card)
   end
 
   def award_spoils
-    (winner.deck.cards << pile_cards).flatten!
+    if type == :basic
+      round_winner = winner.deck.cards
+      pile_cards
+      (round_winner).push(spoils_of_war.shift, spoils_of_war.shift)
+      # require "pry"; binding.pry
+    end
+
   end
 end

@@ -159,9 +159,7 @@ class TurnTest < Minitest::Test
 
     turn = Turn.new(player1, player2)
 
-    assert_equal :basic, turn.type
-    assert_equal player1, turn.winner
-    turn.award_spoils
+    turn.war_or_peace
     assert_equal [card2, card5, card8, card1, card3], player1.deck.cards
     assert_equal [card4, card6, card7], player2.deck.cards
   end
@@ -230,9 +228,38 @@ class TurnTest < Minitest::Test
 
     turn = Turn.new(player1, player2)
 
-    assert_equal player1.deck.cards, turn.war_or_peace
+    assert_equal [card2, card5, card8, card1, card3], turn.war_or_peace
     assert_equal :basic, turn.type
     assert_equal [card4, card6, card7], player2.deck.cards
+  end
+
+  def test_it_can_run_more_than_once_basic_type
+    # skip
+    card1 = Card.new(:heart, 'Jack', 11)
+    card2 = Card.new(:heart, '10', 10)
+    card3 = Card.new(:heart, '9', 9)
+    card4 = Card.new(:diamond, 'Jack', 11)
+    card5 = Card.new(:heart, '8', 8)
+    card6 = Card.new(:diamond, 'Queen', 12)
+    card7 = Card.new(:heart, '3', 3)
+    card8 = Card.new(:diamond, '2', 2)
+
+    deck1 = Deck.new([card1, card2, card5, card8])
+    deck2 = Deck.new([card3, card4, card6, card7])
+
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+
+    turn = Turn.new(player1, player2)
+    turn.war_or_peace
+    assert_equal [card2, card5, card8, card1, card3], player1.deck.cards
+    assert_equal [card4, card6, card7], player2.deck.cards
+    turn.war_or_peace
+    assert_equal [card6, card7, card2, card4], player2.deck.cards
+    assert_equal [card5, card8, card1, card3], player1.deck.cards
+    turn.war_or_peace
+    assert_equal [card8, card1, card3], player1.deck.cards
+    assert_equal [card7, card2, card4, card5, card6], player2.deck.cards
   end
 
 end
