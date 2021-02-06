@@ -13,8 +13,11 @@ class Deck
   end
 
   def percent_high_ranking
-    percentage = high_ranking_cards.length.to_f / cards.length * 100
-    percentage.round(2)
+    if cards.length > 1
+      (high_ranking_cards.length.to_f / cards.length * 100).round(2)
+    else
+      "There are no cards to be ranked!"
+    end
   end
 
   def remove_card
