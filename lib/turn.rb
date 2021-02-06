@@ -6,18 +6,27 @@ class Turn
     @spoils_of_war = []
   end
 
-  def type #determines type of battle and removes card. see deck>remove_card method
-    if player1.deck.rank_of_card_at(0) != player2.deck.rank_of_card_at(0)
+  def type #determines type of battle
+    if first_cards_are_not_the_same
       :basic
-
-    elsif player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) &&
-          player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
+    elsif first_cards_and_third_cards_are_the_same
       :mutually_assured_destruction
-
-    elsif player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0)
+    elsif first_cards_are_the_same
       :war
-
     end
+  end
+
+  def first_cards_are_not_the_same
+    player1.deck.rank_of_card_at(0) != player2.deck.rank_of_card_at(0)
+  end
+
+  def first_cards_and_third_cards_are_the_same
+    player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) &&
+    player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
+  end
+
+  def first_cards_are_the_same
+    player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0)
   end
 
   def winner #determines winner of turn
