@@ -29,11 +29,27 @@ class Turn
     player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0)
   end
 
+  def war_or_peace
+    if type == :basic
+      # winner
+      award_spoils
+    end
+  end
+
   def winner #determines winner of turn
-    if player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0)
-      player1
-    else
+    # if player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0)
+    #   player1
+    # else
+    #   player2
+    # end
+    if type == :basic
+      return player1 if player1.deck.rank_of_card_at(0) > player2.deck.rank_of_card_at(0)
       player2
+    elsif type == :war
+      return player1 if player1.deck.rank_of_card_at(2) > player2.deck.rank_of_card_at(2)
+      player2
+    elsif type == :mutually_assured_destruction
+      "No winner"
     end
   end
 
