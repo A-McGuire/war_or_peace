@@ -113,8 +113,6 @@ class TurnTest < Minitest::Test
     turn = Turn.new(player1, player2)
 
     assert_equal :basic, turn.type
-    assert_equal card1, player1.deck.remove_card
-    assert_equal card3, player2.deck.remove_card
     assert_equal player1, turn.winner
   end
 
@@ -138,14 +136,14 @@ class TurnTest < Minitest::Test
     turn = Turn.new(player1, player2)
 
     assert_equal :basic, turn.type
+    assert_equal player1, turn.winner
     assert_equal card1, player1.deck.remove_card
     assert_equal card3, player2.deck.remove_card
-    assert_equal player1, turn.winner
     assert_equal [card1, card3], turn.pile_cards
   end
 
   def test_award_spoils
-    # skip
+    skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -164,9 +162,9 @@ class TurnTest < Minitest::Test
     turn = Turn.new(player1, player2)
 
     assert_equal :basic, turn.type
+    assert_equal player1, turn.winner
     assert_equal card1, player1.deck.remove_card
     assert_equal card3, player2.deck.remove_card
-    assert_equal player1, turn.winner
     assert_equal [card1, card3], turn.pile_cards
     turn.award_spoils
     assert_equal [card2, card5, card8, card1, card3], player1.deck.cards

@@ -14,12 +14,11 @@ class Turn
       # @player1.deck.remove_card; @player1.deck.remove_card
       :war
     end
-    # winner
   end
 
   def winner #determines winner of turn
     # require "pry"; binding.pry
-    if @player1.deck.battle_card.rank > @player2.deck.battle_card.rank
+    if @player1.deck.rank_of_card_at(0) > @player2.deck.rank_of_card_at(0)
       @player1
     else
       @player2
