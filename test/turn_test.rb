@@ -167,7 +167,7 @@ class TurnTest < Minitest::Test
   end
 
   def test_type_war
-    skip
+    # skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -184,13 +184,12 @@ class TurnTest < Minitest::Test
     player2 = Player.new("Aurora", deck2)
 
     turn = Turn.new(player1, player2)
-    # player1.deck.type
-    player2.deck.type
+    turn.type
     assert_equal :war, turn.type
   end
 
   def test_type_mutually_assured_destruction
-    skip
+    # skip
     card1 = Card.new(:heart, 'Jack', 11)
     card2 = Card.new(:heart, '10', 10)
     card3 = Card.new(:heart, '9', 9)
@@ -208,7 +207,7 @@ class TurnTest < Minitest::Test
 
     turn = Turn.new(player1, player2)
 
-    assert_equal true, turn.type
+    assert_equal :mutually_assured_destruction, turn.type
   end
 
 
