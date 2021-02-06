@@ -16,22 +16,15 @@ class Turn
     end
   end
 
-  def first_cards_are_not_the_same
-    player1.deck.rank_of_card_at(0) != player2.deck.rank_of_card_at(0)
-  end
-
-  def first_cards_and_third_cards_are_the_same
-    player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) &&
-    player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
-  end
-
-  def first_cards_are_the_same
-    player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0)
-  end
 
   def war_or_peace
-    spoils_of_war = []
-    if type == :basic
+    if player1.has_lost? == true
+      return "Player 1 has lost the war"
+    elsif player2.has_lost? == true
+      return "Player 2 has lost the war"
+    elsif type == :basic
+      award_spoils
+    elsif type == :war
       award_spoils
     end
   end
@@ -50,7 +43,14 @@ class Turn
 
   def pile_cards
     #remove cards from both players decks and add to array spoils_of_war
-    spoils_of_war.push(player1.deck.remove_card, player2.deck.remove_card)
+    if type == :basic
+      spoils_of_war.push(player1.deck.remove_card, player2.deck.remove_card)
+    elsif type == :war
+      spoils_of_war.push(player1.deck.remove_card, player1.deck.remove_card,
+                        player1.deck.remove_card, player2.deck.remove_card,
+                        player2.deck.remove_card, player2.deck.remove_card)
+    elsif type == :mutually_assured_destruction
+    end
   end
 
   def award_spoils
@@ -58,8 +58,28 @@ class Turn
       round_winner = winner.deck.cards
       pile_cards
       (round_winner).push(spoils_of_war.shift, spoils_of_war.shift)
-      # require "pry"; binding.pry
+    elsif type == :war
+      round_winner = winner.deck.cards
+      pile_cards
+      (round_winner).push(spoils_of_war.shift, spoils_of_war.shift,
+                          spoils_of_war.shift, spoils_of_war.shift,
+                          spoils_of_war.shift, spoils_of_war.shift)
     end
-
   end
+end
+
+
+
+# Helper methods
+def first_cards_are_not_the_same
+  player1.deck.rank_of_card_at(0) != player2.deck.rank_of_card_at(0)
+end
+
+def first_cards_and_third_cards_are_the_same
+  player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0) &&
+  player1.deck.rank_of_card_at(2) == player2.deck.rank_of_card_at(2)
+end
+
+def first_cards_are_the_same
+  player1.deck.rank_of_card_at(0) == player2.deck.rank_of_card_at(0)
 end
