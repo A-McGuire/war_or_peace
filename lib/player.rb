@@ -3,7 +3,6 @@ class Player
   def initialize(name, deck)
     @name = name
     @deck = deck
-    # @battle_field = []
   end
 
   def has_lost? #determines loser of game
