@@ -2,28 +2,26 @@ class Deck
   attr_reader :cards, :battle_card
   def initialize(cards = [])
     @cards = cards
-    @high_cards = []
-    @battle_card = nil
   end
 
   def rank_of_card_at(index)
-    @cards[index].rank
+    cards[index].rank
   end
 
   def high_ranking_cards
-    @high_cards = @cards.select {|card| card.rank > 10}
+    cards.select {|card| card.rank > 10}
   end
 
   def percent_high_ranking
-    percentage = @high_cards.length.to_f / cards.length * 100
+    percentage = high_ranking_cards.length.to_f / cards.length * 100
     percentage.round(2)
   end
 
   def remove_card
-    @battle_card = @cards.shift
+    cards.shift
   end
 
   def add_card(card)
-    @cards << card
+    cards << card
   end
 end
