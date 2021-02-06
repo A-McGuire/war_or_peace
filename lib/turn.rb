@@ -26,7 +26,7 @@ class Turn
   end
 
   def pile_cards
-    @spoils_of_war.push(@player1.deck.battle_card, @player2.deck.battle_card)
+    @spoils_of_war.push(@player1.deck.remove_card, @player2.deck.remove_card)
   end
 
   def award_spoils
