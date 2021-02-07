@@ -4,12 +4,8 @@ class Player
     @name = name
     @deck = deck
   end
-
+  #todo refactor for war and MAS type cases
   def has_lost? #determines loser of game
-    if deck.cards.length > 0
-      false
-    else
-      true
-    end
+    deck.cards.length == 0
   end
 end

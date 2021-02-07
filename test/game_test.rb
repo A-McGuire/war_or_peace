@@ -1,7 +1,10 @@
 require 'minitest/autorun'
 require 'minitest/pride'
-# require './lib/war_or_peace_runner'
 require './lib/game'
+require './lib/player'
+require './lib/card'
+require './lib/deck'
+require './lib/turn'
 
 class GameTest < Minitest::Test
 
@@ -14,14 +17,7 @@ class GameTest < Minitest::Test
     # skip
     game = Game.new
     game.create_deck
-    assert_equal 52, game.main_deck.length
-  end
-
-  def test_it_is_random #THIS TEST INTENTIONALLY FAILS
-    skip
-    game = Game.new
-    game.create_deck
-    assert_equal game.main_deck, game.randomize
+    assert_equal 52, game.create_deck.length
   end
 
   def test_split_deck
@@ -29,12 +25,30 @@ class GameTest < Minitest::Test
     game = Game.new
     # game.create_deck
     game.split_deck
-    assert_equal 26, game.deck1.length
-    assert_equal game.deck2.length, game.deck1.length
+    assert_equal 26, game.player1_deck.length
+    assert_equal game.player2_deck.length, game.player1_deck.length
   end
 
-  def test_turn_output
-    
+  def test_there_are_decks
+    game = Game.new
+    game.split_deck
+    deck1 = Deck.new(game.player1_deck)
+    deck2 = Deck.new(game.player2_deck)
+    assert_equal 26, deck1.cards.length
+    assert_equal 26, deck2.cards.length
+  end
+
+  def test_there_are_players_with_decks
+    game = Game.new
+    game.split_deck
+    deck1 = Deck.new(game.player1_deck)
+    deck2 = Deck.new(game.player2_deck)
+
+    player1 = Player.new("Megan", deck1)
+    player2 = Player.new("Aurora", deck2)
+    assert_equal player1.deck.cards, deck1.cards
+    assert_equal player2.deck.cards, deck2.cards
+
   end
 
 end

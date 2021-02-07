@@ -59,14 +59,16 @@ class Game
 
   def play_game
     turn_counter = 1
-    until @turn.player1.has_lost? == true || @turn.player2.has_lost? || turn_counter == 50
+    until @turn.player1.has_lost? == true || @turn.player2.has_lost? || turn_counter == 5000
       @turn.war_or_peace
+
       if @turn.type == :basic
         turn_counter += 1
         p "Turn #{turn_counter}: #{@turn.winner.name} won #{@turn.spoils_of_war.length} cards"
         p "Turn type: #{@turn.type}"
         p "Player1 card count: #{@player1.deck.cards.length}"
         p "Player2 card count: #{@player2.deck.cards.length}"
+
       elsif @turn.type == :war
         turn_counter += 1
         p "Turn #{turn_counter}: WAR - #{@player1.name} won #{@turn.spoils_of_war.length} cards"
@@ -75,11 +77,15 @@ class Game
         p "*mutually assured destruction* #{@turn.spoils_of_war.length} removed from play"
       end
     end
-    #loop 1,000,000 times or until a player is out of cards
-    #run war_or_peace until a player has lost, or a million runs
-    #output turn #
-    #output winner and cards won and winners card count
-    #repeat
+    end_game
   end
 
+  def end_game
+    if @turn.player1.has_lost? == true
+      p "*~*~*~* player2 has won the game! *~*~*~*"
+    elsif @turn.player2.has_lost? == true
+      p "*~*~*~* player1 has won the game! *~*~*~*"
+    elsif p "----Draw----"
+    end
+  end
 end

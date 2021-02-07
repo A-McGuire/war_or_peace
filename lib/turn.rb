@@ -59,6 +59,12 @@ class Turn
   end
 
   def award_spoils
+  #   def award_spoils(winner)
+  #   @spoils_of_war.each do |card|
+  #     winner.deck.add_card(card)
+  #   end
+  #   #@spoils_of_war.clear
+  #   end
     if type == :basic
       round_winner = winner.deck.cards
       pile_cards
