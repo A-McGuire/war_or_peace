@@ -59,7 +59,7 @@ class Game
 
   def play_game
     turn_counter = 1
-    until @turn.player1.has_lost? == true || @turn.player2.has_lost? || turn_counter == 5000
+    until @turn.player1.has_lost? == true || @turn.player2.has_lost? || turn_counter == 1000000
       @turn.war_or_peace
 
       if @turn.type == :basic
