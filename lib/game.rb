@@ -71,7 +71,7 @@ class Game
 
       elsif @turn.type == :war
         turn_counter += 1
-        p "Turn #{turn_counter}: WAR - #{@player1.name} won #{@turn.spoils_of_war.length} cards"
+        p "Turn #{turn_counter}: WAR - #{@turn.winner.name} won #{@turn.spoils_of_war.length} cards"
       elsif @turn.type == :mutually_assured_destruction
         turn_counter += 1
         p "*mutually assured destruction* #{@turn.spoils_of_war.length} removed from play"
